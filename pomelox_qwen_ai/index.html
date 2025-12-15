@@ -827,7 +827,12 @@
                     <div class="school-selector">
                         <label for="school">School:</label>
                         <select id="school">
-                            <option value="">Loading...</option>
+                            <option value="">-- Select School --</option>
+                            <option value="211" data-school-id="UCB">UC Berkeley (UCB)</option>
+                            <option value="214" data-school-id="UCLA">UC Los Angeles (UCLA)</option>
+                            <option value="216" data-school-id="UCSD">UC San Diego (UCSD)</option>
+                            <option value="215" data-school-id="UCI">UC Irvine (UCI)</option>
+                            <option value="300" data-school-id="Cornell">Cornell University (Cornell)</option>
                         </select>
                     </div>
                     <div class="session-info" id="sessionInfo"></div>
@@ -876,10 +881,9 @@
     </div>
 
     <script>
-        const BASE_URL = 'http://localhost:8087';
-            // Use the current page origin so fetches work when the app is forwarded
-            // (e.g. in Codespaces / app.github.dev) instead of always requesting localhost.
-            const BASE_URL = window.location.origin;
+        // Use the current page origin so fetches work when the app is forwarded
+        // (e.g. in Codespaces / app.github.dev) instead of always requesting localhost.
+        const BASE_URL = window.location.origin;
 
             // Fallback schools list used if fetching `/schools` fails (prevents "Load Failed").
             const DEFAULT_SCHOOLS = {
@@ -904,95 +908,58 @@
 
         // ==================== 初始化 ====================
         document.addEventListener('DOMContentLoaded', function() {
-            // Ensure the selector is pre-populated synchronously to avoid a persistent "Loading..." state
-            populatePreferredSchools();
             loadSchools();
             setupTextarea();
             loadHistoryList();
         });
 
-        function populatePreferredSchools() {
+        // ==================== 学校相关 ====================
+        function loadSchools() {
+            // Schools are now hardcoded in HTML; just attach the change handler and optionally fetch fresh data
             const select = document.getElementById('school');
-            select.innerHTML = '<option value="">-- Select School --</option>';
-            const SELECT_SCHOOLS = ['UCB', 'UCLA', 'UCSD', 'UCI', 'Cornell'];
-            for (const id of SELECT_SCHOOLS) {
-                const info = DEFAULT_SCHOOLS[id];
-                if (!info) continue;
-                const option = document.createElement('option');
-                option.value = info.deptId || '';
-                option.dataset.schoolId = id;
-                option.textContent = `${info.name} (${id})`;
-                select.appendChild(option);
+
+            // Fetch backend schools list for cached data (optional enhancement)
+            fetch(`${BASE_URL}/schools`)
+                .then(r => r.json())
+                .then(data => {
+                    schoolsData = data.schools || {};
+                })
+                .catch(err => {
+                    // Use fallback - already displayed in HTML
+                    console.warn('Could not fetch schools from backend, using hardcoded list:', err);
+                });
+
+            // Attach change handler to select (works with pre-populated HTML options)
+            select.addEventListener('change', handleSchoolChange);
+            
+            // Also ensure initial state if there's a saved selection
+            if (select.value) {
+                handleSchoolChange.call(select);
             }
         }
-
-        // ==================== 学校相关 ====================
-        async function loadSchools() {
-            const select = document.getElementById('school');
-            // Ensure we show a loading state then replace it later
-            select.innerHTML = '<option value="">Loading...</option>';
-
-            // Abort fetch after timeout to avoid hanging the UI
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), 2000);
-
-            try {
-                const response = await fetch(`${BASE_URL}/schools`, { signal: controller.signal });
-                clearTimeout(timeout);
-                const data = await response.json();
-                schoolsData = data.schools || {};
-
-                select.innerHTML = '<option value="">-- Select School --</option>';
-                const SELECT_SCHOOLS = ['UCB', 'UCLA', 'UCSD', 'UCI', 'Cornell'];
-                for (const id of SELECT_SCHOOLS) {
-                    const info = (data.schools && data.schools[id]) || DEFAULT_SCHOOLS[id];
-                    if (!info) continue;
-                    const option = document.createElement('option');
-                    option.value = info.deptId || '';
-                    option.dataset.schoolId = id;
-                    option.textContent = `${info.name} (${id})`;
-                    select.appendChild(option);
-                }
-
-                select.addEventListener('change', function() {
-                    currentDeptId = this.value || '';
-                    const selectedOption = this.options[this.selectedIndex];
-                    currentSchoolId = selectedOption.dataset.schoolId || '';
-
-                    const info = (schoolsData && schoolsData[currentSchoolId]) || DEFAULT_SCHOOLS[currentSchoolId] || {};
-                    const welcomeH2 = document.querySelector('#welcomeMessage h2');
-                    if (welcomeH2) {
-                        welcomeH2.textContent = `Welcome to ${info.name || currentSchoolId} AI Assistant`;
-                    }
-
-                    saveCurrentChat();
-                });
-            } catch (error) {
-                // fetch failed or timed out; populate curated fallback so user can choose
-                console.error('Failed to load schools (fetch error or timeout):', error);
-                select.innerHTML = '<option value="">-- Select School --</option>';
-                const SELECT_SCHOOLS = ['UCB', 'UCLA', 'UCSD', 'UCI', 'Cornell'];
-                for (const id of SELECT_SCHOOLS) {
-                    const info = DEFAULT_SCHOOLS[id];
-                    if (!info) continue;
-                    const option = document.createElement('option');
-                    option.value = info.deptId || '';
-                    option.dataset.schoolId = id;
-                    option.textContent = `${info.name} (${id})`;
-                    select.appendChild(option);
-                }
-                select.addEventListener('change', function() {
-                    currentDeptId = this.value || '';
-                    const selectedOption = this.options[this.selectedIndex];
-                    currentSchoolId = selectedOption.dataset.schoolId || '';
-                    const info = DEFAULT_SCHOOLS[currentSchoolId] || {};
-                    const welcomeH2 = document.querySelector('#welcomeMessage h2');
-                    if (welcomeH2) {
-                        welcomeH2.textContent = `Welcome to ${info.name || currentSchoolId} AI Assistant`;
-                    }
-                    saveCurrentChat();
-                });
+        
+        function handleSchoolChange() {
+            const select = this || document.getElementById('school');
+            const selectedValue = select.value;
+            
+            // Ensure the value is treated as a string for comparison
+            currentDeptId = String(selectedValue).trim();
+            
+            console.log('School changed. New currentDeptId:', currentDeptId, 'Type:', typeof currentDeptId);
+            
+            const selectedOption = select.options[select.selectedIndex];
+            if (selectedOption) {
+                currentSchoolId = selectedOption.getAttribute('data-school-id') || '';
+                console.log('Selected school ID:', currentSchoolId);
             }
+
+            const info = (schoolsData && schoolsData[currentSchoolId]) || DEFAULT_SCHOOLS[currentSchoolId] || {};
+            const welcomeH2 = document.querySelector('#welcomeMessage h2');
+            if (welcomeH2) {
+                welcomeH2.textContent = `Welcome to ${info.name || currentSchoolId} AI Assistant`;
+            }
+
+            saveCurrentChat();
         }
 
         // ==================== 后端API存储 ====================
