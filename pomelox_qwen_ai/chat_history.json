@@ -1,0 +1,95 @@
+[
+  {
+    "sessionId": "session_1765754875897_v1nscxca9",
+    "deptId": "216",
+    "schoolId": "UCSD",
+    "schoolName": "UC San Diego",
+    "title": "Help me to search for informat",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Help me to search for information for UCSD",
+        "timestamp": 1765754891536
+      },
+      {
+        "role": "assistant",
+        "content": "Sure! Here’s some helpful information specifically for **University of California, San Diego (UCSD)** based on the resources available and general knowledge. Let me know if you’d like details about a specific topic.\n\n---\n\n### 🎓 **UCSD Quick Facts**\n- **Full Name**: University of California, San Diego  \n- **Location**: La Jolla, California, USA  \n- **Campus Type**: Public Research University, Coastal Setting  \n- **Undergraduate Enrollment**: ~30,000+ students  \n- **Known For**: Strong programs in Engineering, Biological Sciences, Computer Science, Cognitive Science, and International Relations  \n\n---\n\n### ✅ **Admissions & Enrollment Support (via CHINESE UNION)**\nAs mentioned in your reference materials:\n\n> **CHINESE UNION (VITA Global)** is a 501(c)(3) non-profit organization that has supported over 100,000 international students since 2005.\n\nWhile the document references UCI (University of California, Irvine), **CHINESE UNION also has an active chapter at UCSD** to support incoming international students.\n\n#### How to Connect with CHINESE UNION at UCSD:\n- **WeChat Official Account**: `CU UCSD`  \n- **Xiaohongshu (Little Red Book)**: Search `CHINESE UNION(UCSD)`  \n- **Website**: [www.ChineseUnion.org](http://www.ChineseUnion.org)\n\nThey offer **free services** such as:\n- ✈️ **Free Airport Pickup** for new students\n- 💬 **Official New Student WeChat Groups**\n- 🏨 **Student Discount Hotel Program**\n- 📱 Local SIM Card & Bank Account Assistance\n- 🍜 Food delivery guidance\n- 🚗 Car buying support (in Southern California)\n- 💬 Legal advice and emergency help\n\n👉 *Tip:* Join their WeChat group early to connect with other incoming students and get real-time updates!\n\n---\n\n### 📘 **Key Steps After Acceptance to UCSD**\n\nHere are important tasks to complete before starting at UCSD:\n\n| Task | Details |\n|------|--------|\n| **Accept Your Offer (SIR)** | Submit your Statement of Intent to Register by the deadline (usually May 1 for freshmen, varies for transfer/grad students). |\n| **Apply for I-20 / DS-2019** | Required for F-1 visa holders. Start this process through UCSD’s International Center. |\n| **Pay Fees & Tuition Deposit** | Check fees on TritonLink or the billing portal. |\n| **Submit Final Transcripts & Test Scores** | Even after acceptance, official documents must be sent. |\n| **Complete Immunization Requirements** | Upload vaccination records via the Patient Portal. |\n| **Take Placement Exams** | Math, Writing, Language exams may be required depending on your major. |\n| **Attend Orientation (O-Week)** | Includes academic advising, campus tours, and social events. Mandatory for most new students. |\n| **Apply for Housing** | On-campus housing is limited—apply early! First-years typically live on campus. |\n\n🔗 Official UCSD Admitted Student Checklist: [https://admissions.ucsd.edu/enroll](https://admissions.ucsd.edu/enroll)\n\n---\n\n### 🏫 **Academic Resources at UCSD**\nFrom the reference material and UCSD offerings:\n\n- **How to Choose Classes**: Use **TritonEd** and **Schedule of Classes** tool.\n- **GE Requirements**: General Education requirements vary by college — UCSD has **seven undergraduate colleges**, each with unique GE structures.\n- **Finding Course Schedules**: Visit [https://schedule.ucsd.edu](https://schedule.ucsd.edu)\n- **Academic Advising**: Contact your **College Academic Advisor** and **Major Department Advisor**.\n- **Changing Majors / Colleges**: Possible but competitive (e.g., CS, Business minors). Requires completing prerequisite courses with strong grades.\n- **Double Major**: Allowed; requires approval from both departments.\n- **Academic Integrity**: Taken seriously—review policies at [https://academicintegrity.ucsd.edu](https://academicintegrity.ucsd.edu)\n\n---\n\n### 🌍 **International Student Support**\nManaged by **UCSD's International Center**:\n- ✅ CPT/OPT Work Authorization\n- ✅ Travel Signature (I-20/DS-2019)\n- ✅ Social Security Number (SSN) Application Help\n- ✅ Visa Advising\n\n📍 Website: [https://ic.ucsd.edu](https://ic.ucsd.edu)\n\n---\n\n### 🏠 **On-Campus Life**\n- **Housing Options**: ERC, Muir, Marshall, Revelle, Warren, Sixth, Seventh Colleges all have dorms and dining halls.\n- **Meal Plans**: Required for on-campus residents.\n- **Gym**: Price Center Gym, Canyonview Aquatic Center\n- **Coffee Shops**: Groundwork Coffee, Starbucks, Blue Oak Café\n- **Student Organizations**: Over 600 clubs — find them via [The Hub](https://thehub.ucsd.edu)\n\n---\n\n### 🛒 **Off-Campus Living Tips**\n- **Groceries**: Vons, Ralphs, Trader Joe’s, H Mart (Korean grocery), Ranch99 (Asian market)\n- **Furniture & Supplies**: IKEA San Diego, Target, Amazon lockers on campus\n- **Phones**: T-Mobile, AT&T, Verizon widely used; prepaid plans (Mint Mobile, Visible) also popular\n- **Banks**: Chase, Wells Fargo, Bank of America branches nearby\n\n---\n\nIf you tell me more about what you're looking for — for example:\n- Are you a **freshman**, **transfer**, or **graduate student**?\n- Do you need help with **housing**, **courses**, **visas**, or just want to meet other Chinese-speaking students?\n\nI can give you even more targeted advice!\n\nLet me know how I can help further 😊",
+        "sourceType": "web_search",
+        "webSources": {
+          "search_results": []
+        },
+        "ragScore": 0.44,
+        "timestamp": 1765754924075
+      }
+    ],
+    "updatedAt": 1765754924098,
+    "createdAt": 1765754924098
+  },
+  {
+    "sessionId": "session_1765754185434_f6joadths",
+    "deptId": "216",
+    "schoolId": "UCSD",
+    "schoolName": "UC San Diego",
+    "title": "tell me about what information",
+    "messages": [
+      {
+        "role": "user",
+        "content": "tell me about what information you have for UCSD",
+        "timestamp": 1765754206491
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! I'm the AI assistant representing **CHINESE UNION (VITA Global)**, a 501(c)(3) non-profit organization dedicated to supporting international students.\n\nHowever, based on the reference materials provided, the information available is primarily focused on **University of California, Irvine (UCI)**, not **University of California, San Diego (UCSD)**. While CHINESE UNION does support students at multiple universities, including UCSD, the specific details in the documents—such as campus services, social media accounts, and program implementation—are centered around UCI.\n\nThat said, here’s what we *can* share about CHINESE UNION’s general support for **UCSD students**:\n\n### ✅ CHINESE UNION Services Available for UCSD Students:\nEven though UCSD-specific operational details aren’t fully outlined in the current materials, CHINESE UNION offers the following **university-wide programs** that are typically accessible to UCSD students:\n\n- **Official WeChat New Student Groups**:  \n  Join the official **CHINESE UNION (UCSD)** WeChat public account to get access to verified新生群 (new student微信群) where you can connect with other incoming students, ask questions, and receive timely updates.\n\n- **Free Airport Pickup Service**:  \n  Eligible new international students may receive complimentary airport transportation assistance upon arrival (availability subject to location and volunteer capacity).\n\n- **Student Discount Programs**:  \n  Access discounted rates on hotels, phone plans, bank accounts, and more through CU partnerships.\n\n- **Academic & Immigration Support Resources**:  \n  Guidance on topics like:\n  - Course registration\n  - GE and graduation requirements\n  - OPT/CPT applications\n  - I-20 and visa-related questions\n  - Academic holds and advisor appointments\n\n- **Campus Integration Activities**:  \n  Welcome events, cultural outings, and networking opportunities designed to help new students adjust to life in the U.S.\n\n- **Emergency Assistance**:  \n  24/7 emergency contact support for urgent situations (e.g., getting lost, medical emergencies, legal concerns).\n\n---\n\n### 🔗 How to Connect with CHINESE UNION at UCSD:\nAlthough the current document highlights **UCI CU** as the WeChat account and **CHINESE UNION(UCI)** as the Xiaohongshu handle, you should look for:\n- **WeChat Public Account**: Search “**CHINESE UNION (UCSD)**” or ask your admit cohort for the correct link.\n- **Xiaohongshu (Little Red Book)**: Look for an official account under **CHINESE UNION(UCSD)**\n- **Website**: [www.ChineseUnion.org](http://www.ChineseUnion.org) — Check for UCSD-specific announcements\n\n---\n\nIf you’re looking for specific guidance such as:\n- How to apply for housing at UCSD?\n- When to take placement exams?\n- How to join a student club?\n- What are the vaccine requirements?\n\n👉 Please let me know your exact question, and I’ll do my best to provide accurate, helpful information—even if it means giving general UC system or public UCSD knowledge when specifics aren't in our internal docs.\n\nYou're also welcome to reach out directly via the **CHINESE UNION (UCSD)** WeChat platform once you’ve joined for peer and volunteer support!\n\nWelcome to UCSD! 🎉",
+        "sourceType": "web_search",
+        "webSources": {
+          "search_results": []
+        },
+        "ragScore": 0.444,
+        "timestamp": 1765754224328
+      },
+      {
+        "role": "user",
+        "content": "Help me to search for UCSD related websites",
+        "timestamp": 1765754285243
+      },
+      {
+        "role": "assistant",
+        "content": "Of course! Here are the **official and helpful websites** related to the **University of California, San Diego (UCSD)** to help you navigate your admissions, enrollment, academics, housing, and student life:\n\n---\n\n### 🌐 **Official UCSD Websites**\n\n| Purpose | Website | Description |\n|--------|--------|-----------|\n| **Main UCSD Website** | [https://www.ucsd.edu](https://www.ucsd.edu) | The official homepage for UCSD. Great for general information about the university, news, and resources. |\n| **Admissions (Undergraduate)** | [https://admissions.ucsd.edu](https://admissions.ucsd.edu) | For admitted and prospective students: application status, accepting your offer (SIR), deadlines, and requirements. |\n| **Graduate Division** | [https://graddiv.ucsd.edu](https://graddiv.ucsd.edu) | Information for graduate students, including program details, funding, and policies. |\n| **Office of the Registrar** | [https://registrar.ucsd.edu](https://registrar.ucsd.edu) | Academic records, enrollment, transcripts, fees, SIR submission, and deadline tracking. |\n| **TritonLink (Student Portal)** | [https://tritonline.ucsd.edu](https://tritonline.ucsd.edu) | Your personal student dashboard—used to register for classes, view financial aid, pay bills, and access email. |\n| **MyTrack (Checklist for New Students)** | [https://mytrack.ucsd.edu](https://mytrack.ucsd.edu) | A step-by-step checklist for newly admitted students (undergrad and grad). Includes I-20 requests, health forms, housing, etc. |\n| **International Center (for International Students)** | [https://ic.ucsd.edu](https://ic.ucsd.edu) | Visa support (F-1/J-1), OPT/CPT, immigration advising, orientation, and workshops. |\n| **Housing & Dining Services** | [https://housing.ucsd.edu](https://housing.ucsd.edu) | On-campus housing options, applications, rates, room assignments, and meal plans. |\n| **Academic Advising** | [https://acms.ucsd.edu](https://acms.ucsd.edu) | Academic advising, major/minor exploration, GE planning, and degree audits. |\n| **Catalog (Courses & Programs)** | [https://catalog.ucsd.edu](https://catalog.ucsd.edu) | Full list of academic programs, course descriptions, and degree requirements. |\n\n---\n\n### 💉 Health & Wellness\n\n| Website | Purpose |\n|--------|--------|\n| [https://studenthealth.ucsd.edu](https://studenthealth.ucsd.edu) | Student Health Services – medical care, immunization compliance, insurance, and mental health. |\n| [https://caps.ucsd.edu](https://caps.ucsd.edu) | Counseling and Psychological Services (CAPS) – free mental health support for students. |\n\n---\n\n### 📚 Learning & Academic Support\n\n| Website | Purpose |\n|--------|--------|\n| [https://library.ucsd.edu](https://library.ucsd.edu) | UCSD Library – research databases, study spaces, tech loans, and citation help. |\n| [https://tutoring.ucsd.edu](https://tutoring.ucsd.edu) | Free tutoring services, writing centers, and academic success workshops. |\n\n---\n\n### 🚌 Transportation & Campus Life\n\n| Website | Purpose |\n|--------|--------|\n| [https://transportation.ucsd.edu](https://transportation.ucsd.edu) | Parking, campus shuttles (RATs), bike sharing, and transit passes. |\n| [https://recreation.ucsd.edu](https://recreation.ucsd.edu) | Gyms, fitness classes, outdoor adventures, and intramural sports. |\n| [https://studentlife.ucsd.edu](https://studentlife.ucsd.edu) | Student organizations, leadership programs, cultural centers, and events. |\n\n---\n\n### 💸 Financial Matters\n\n| Website | Purpose |\n|--------|--------|\n| [https://financialaid.ucsd.edu](https://financialaid.ucsd.edu) | Scholarships, grants, loans, and work-study programs. |\n| [https://bursar.ucsd.edu](https://bursar.ucsd.edu) | Billing, tuition payment plans, and fee statements. |\n\n---\n\n### ✅ CHINESE UNION Resources (Support for International Students)\n\nWhile not a UCSD department, **CHINESE UNION (VITA Global)** provides peer-led support for international students. Use these links:\n\n- **Organization Website**: [www.ChineseUnion.org](http://www.ChineseUnion.org)  \n- **WeChat Official Account**: Search “**CHINESE UNION (UCSD)**”  \n- **Xiaohongshu**: Look for **CHINESE UNION(UCSD)**  \n- Services include: free airport pickup, new student groups, phone/bank setup help, academic guidance, and emergency support.\n\n---\n\nIf you're looking for something specific like:\n- Placement exams (e.g., math or language)\n- How to transfer credits\n- Waitlisted? What to do next\n- Joining clubs or research opportunities\n\n👉 Just let me know, and I’ll guide you to the right page or process!\n\nWelcome to UCSD — you're in great hands! 🐬",
+        "sourceType": "web_search",
+        "webSources": {
+          "search_results": []
+        },
+        "ragScore": 0.428,
+        "timestamp": 1765754310033
+      }
+    ],
+    "updatedAt": 1765754310037,
+    "createdAt": 1765754224332
+  },
+  {
+    "sessionId": "session_1765754125436_3721cvbb8",
+    "deptId": "226",
+    "schoolId": "NYU",
+    "schoolName": "New York University",
+    "title": "How much is the housing deposi",
+    "messages": [
+      {
+        "role": "user",
+        "content": "How much is the housing deposit?",
+        "timestamp": 1765754134616
+      },
+      {
+        "role": "assistant",
+        "content": "The provided reference materials do not specify the exact amount of the housing deposit for UCLA. However, based on general UCLA housing policies, most incoming undergraduate and graduate students are typically required to submit a housing deposit (often around $300–$500) when applying for on-campus housing to secure their placement.\n\nFor the most accurate and up-to-date information about the housing deposit amount and deadlines, I recommend visiting the official **UCLA Housing website** or contacting **UCLA Student Housing** directly at:  \n👉 [housing.ucla.edu](https://housing.ucla.edu)\n\nIf you're an incoming student, you can also check your housing application portal for specific details about deposit requirements and payment instructions.",
+        "sourceType": "web_search",
+        "webSources": {
+          "search_results": []
+        },
+        "ragScore": 0.236,
+        "timestamp": 1765754143128
+      }
+    ],
+    "updatedAt": 1765754167647,
+    "createdAt": 1765754143130
+  }
+]

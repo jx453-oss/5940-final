@@ -1,0 +1,12 @@
+dashscope==1.20.4
+flask==2.3.2
+flask-cors==4.0.0
+python-dotenv==1.1.1
+
+# RAG 相关依赖
+llama-index-core==0.10.67
+llama-index-embeddings-dashscope==0.1.4
+llama-index-readers-file==0.1.33
+llama-index-postprocessor-dashscope-rerank-custom==0.1.0
+docx2txt==0.8
+pydantic>=2.7.0

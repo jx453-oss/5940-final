@@ -1,0 +1,58 @@
+{
+  "test1_knowledge_base": {
+    "answer": "加州大学尔湾分校（UCI）的**注册意向声明（Statement of Intent to Register, SIR）** 截止日期是：  \n\n👉 **2024年5月15日之前**。\n\n根据录取要求，您必须在此日期前登录“已录取学生门户网站”（Admitted Student Portal）提交SIR，以正式接受录取通知。这是保留在UCI入学资格的关键步骤。\n\n此外，请注意：\n- 如果您计划住校，必须先提交SIR，然后才能提交住房申请。\n- 住房申请截止日期为**5月16日**，建议尽早完成SIR，以便有足够时间处理后续流程。\n- 某些研究生项目可能有更早的SIR截止要求（例如4月15日前），请以您所在项目的具体通知为准。\n\n更多信息可参考：[UCI本科招生官网](https://admissions.uci.edu) 或通过【CHINESE UNION UCI】微信公众号获取中文指南。",
+    "question": "UCI的SIR截止日期是什么时候？",
+    "rag_score": 0.621,
+    "school_id": "UCI",
+    "session_id": "657c93cc-abfe-455d-93b2-56b67e6c904f",
+    "source_type": "knowledge_base"
+  },
+  "test2_web_search": {
+    "answer": "2024年美国总统大选中，共和党总统候选人唐纳德·特朗普宣布获胜，并成功赢得总统选举[1][2][3]。民主党候选人卡玛拉·哈里斯已承认败选[1]。选举结果于2024年11月6日左右公布[2][3]。",
+    "question": "2024年美国总统大选结果是什么？",
+    "rag_score": 0.279,
+    "school_id": "UCI",
+    "session_id": "05057fbe-7821-42d8-88df-84ebb10bbeb7",
+    "source_type": "web_search",
+    "web_sources": {
+      "extra_tool_info": [],
+      "search_results": [
+        {
+          "icon": "https://mbs1.bdstatic.com/searchbox/mappconsole/image/20200630/db4d874a-872b-4b27-931d-775a91ed0003.png",
+          "index": 1,
+          "site_name": "百度百科",
+          "title": "2024年美利坚合众国总统选举",
+          "url": "https://baike.baidu.com/item/2024年美利坚合众国总统选举/66226719"
+        },
+        {
+          "icon": "https://kan.china.com/apple-touch-icon-precomposed.png",
+          "index": 2,
+          "site_name": "中华网",
+          "title": "尘埃落定!2024年美国大选结果公布",
+          "url": "https://kan.china.com/article/5599508.html"
+        },
+        {
+          "icon": "https://search-operate.cdn.bcebos.com/1e0e6124f0ab56774c9f4d4b46a9ed8c.png",
+          "index": 3,
+          "site_name": "央视国际",
+          "title": "中国新闻",
+          "url": "https://tv.cctv.cn/2024/11/06/VIDExMt6N351EZG37Jhc45ZY241106.shtml"
+        },
+        {
+          "icon": "https://search-operate.cdn.bcebos.com/a272232fadb7ea79c6ae4c31b012b89e.jpeg",
+          "index": 4,
+          "site_name": "央视国际",
+          "title": "[中国新闻]关注2024美国大选结果 共和党总统候选人特朗普宣布胜选",
+          "url": "http://m.app.cctv.com/vsetv/detail/C10336/4ca55a9cf1e24473ada9154a31de372d/index.shtml"
+        },
+        {
+          "icon": "https://search-operate.cdn.bcebos.com/1e0e6124f0ab56774c9f4d4b46a9ed8c.png",
+          "index": 5,
+          "site_name": "央视国际",
+          "title": "共同关注",
+          "url": "https://tv.cctv.cn/2024/11/06/VIDETZ6mN0C1ilR4y5jFmQXy241106.shtml"
+        }
+      ]
+    }
+  }
+}
