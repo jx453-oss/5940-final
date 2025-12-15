@@ -19,7 +19,7 @@ class Config:
     # School configuration (file field corresponds to actual filename in school_data/ directory, without extension)
     # deptId is the department ID in the backend system, used for automatic school matching
     SCHOOLS = {
-        'UCI': {'name': 'UC Irvine', 'name_cn': 'UC Irvine', 'file': 'UCI', 'deptId': None},
+        'UCI': {'name': 'UC Irvine', 'name_cn': 'UC Irvine', 'file': 'UCI', 'deptId': 215},
         'UCSD': {'name': 'UC San Diego', 'name_cn': 'UC San Diego', 'file': 'UCSD', 'deptId': 216},
         'NYU': {'name': 'New York University', 'name_cn': 'New York University', 'file': 'NYUCU', 'deptId': 226},
         'OSU': {'name': 'Ohio State University', 'name_cn': 'Ohio State University', 'file': 'OSUCU', 'deptId': None},
@@ -28,7 +28,11 @@ class Config:
         'UPenn': {'name': 'University of Pennsylvania', 'name_cn': 'University of Pennsylvania', 'file': 'UPennCU', 'deptId': None},
         'USC': {'name': 'University of Southern California', 'name_cn': 'University of Southern California', 'file': 'USCCU', 'deptId': 213},
         'UW': {'name': 'University of Washington', 'name_cn': 'University of Washington', 'file': 'UWCU', 'deptId': 218},
+        'Cornell': {'name': 'Cornell University', 'name_cn': 'Cornell University', 'file': 'Cornell', 'deptId': 300},
     }
+
+    # Add Cornell for frontend selection (no deptId mapping available)
+    SCHOOLS['Cornell'] = {'name': 'Cornell University', 'name_cn': 'Cornell University', 'file': 'Cornell', 'deptId': None}
 
     # Reverse mapping from deptId to school_id (for quick school lookup by user department ID)
     DEPT_TO_SCHOOL = {
@@ -38,6 +42,8 @@ class Config:
         216: 'UCSD',  # UC San Diego
         218: 'UW',    # University of Washington
         226: 'NYU',   # New York University
+        215: 'UCI',   # UC Irvine
+        300: 'Cornell',
     }
 
     # RAG configuration

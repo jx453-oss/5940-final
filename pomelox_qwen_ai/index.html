@@ -877,6 +877,23 @@
 
     <script>
         const BASE_URL = 'http://localhost:8087';
+            // Use the current page origin so fetches work when the app is forwarded
+            // (e.g. in Codespaces / app.github.dev) instead of always requesting localhost.
+            const BASE_URL = window.location.origin;
+
+            // Fallback schools list used if fetching `/schools` fails (prevents "Load Failed").
+            const DEFAULT_SCHOOLS = {
+                'UCI': { name: 'UC Irvine', name_cn: 'UC Irvine', file: 'UCI', deptId: 215 },
+                'UCSD': { name: 'UC San Diego', name_cn: 'UC San Diego', file: 'UCSD', deptId: 216 },
+                'NYU': { name: 'New York University', name_cn: 'New York University', file: 'NYUCU', deptId: 226 },
+                'OSU': { name: 'Ohio State University', name_cn: 'Ohio State University', file: 'OSUCU', deptId: null },
+                'UCB': { name: 'UC Berkeley', name_cn: 'UC Berkeley', file: 'UCBCU', deptId: 211 },
+                'UCLA': { name: 'UC Los Angeles', name_cn: 'UC Los Angeles', file: 'UCLACU', deptId: 214 },
+                'UPenn': { name: 'University of Pennsylvania', name_cn: 'University of Pennsylvania', file: 'UPennCU', deptId: null },
+                'USC': { name: 'University of Southern California', name_cn: 'University of Southern California', file: 'USCCU', deptId: 213 },
+                'UW': { name: 'University of Washington', name_cn: 'University of Washington', file: 'UWCU', deptId: 218 },
+                'Cornell': { name: 'Cornell University', name_cn: 'Cornell University', file: 'Cornell', deptId: 300 }
+            };
 
         let currentSessionId = '';
         let currentDeptId = '';
@@ -887,46 +904,94 @@
 
         // ==================== 初始化 ====================
         document.addEventListener('DOMContentLoaded', function() {
+            // Ensure the selector is pre-populated synchronously to avoid a persistent "Loading..." state
+            populatePreferredSchools();
             loadSchools();
             setupTextarea();
             loadHistoryList();
         });
 
+        function populatePreferredSchools() {
+            const select = document.getElementById('school');
+            select.innerHTML = '<option value="">-- Select School --</option>';
+            const SELECT_SCHOOLS = ['UCB', 'UCLA', 'UCSD', 'UCI', 'Cornell'];
+            for (const id of SELECT_SCHOOLS) {
+                const info = DEFAULT_SCHOOLS[id];
+                if (!info) continue;
+                const option = document.createElement('option');
+                option.value = info.deptId || '';
+                option.dataset.schoolId = id;
+                option.textContent = `${info.name} (${id})`;
+                select.appendChild(option);
+            }
+        }
+
         // ==================== 学校相关 ====================
         async function loadSchools() {
-            try {
-                const response = await fetch(`${BASE_URL}/schools`);
-                const data = await response.json();
-                schoolsData = data.schools;
-                const select = document.getElementById('school');
-                select.innerHTML = '<option value="">-- Select School --</option>';
+            const select = document.getElementById('school');
+            // Ensure we show a loading state then replace it later
+            select.innerHTML = '<option value="">Loading...</option>';
 
-                for (const [id, info] of Object.entries(data.schools)) {
-                    if (info.deptId) {
-                        const option = document.createElement('option');
-                        option.value = info.deptId;
-                        option.dataset.schoolId = id;
-                        option.textContent = `${info.name} (${id})`;
-                        select.appendChild(option);
-                    }
+            // Abort fetch after timeout to avoid hanging the UI
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 2000);
+
+            try {
+                const response = await fetch(`${BASE_URL}/schools`, { signal: controller.signal });
+                clearTimeout(timeout);
+                const data = await response.json();
+                schoolsData = data.schools || {};
+
+                select.innerHTML = '<option value="">-- Select School --</option>';
+                const SELECT_SCHOOLS = ['UCB', 'UCLA', 'UCSD', 'UCI', 'Cornell'];
+                for (const id of SELECT_SCHOOLS) {
+                    const info = (data.schools && data.schools[id]) || DEFAULT_SCHOOLS[id];
+                    if (!info) continue;
+                    const option = document.createElement('option');
+                    option.value = info.deptId || '';
+                    option.dataset.schoolId = id;
+                    option.textContent = `${info.name} (${id})`;
+                    select.appendChild(option);
                 }
 
                 select.addEventListener('change', function() {
-                    currentDeptId = this.value;
+                    currentDeptId = this.value || '';
                     const selectedOption = this.options[this.selectedIndex];
                     currentSchoolId = selectedOption.dataset.schoolId || '';
-                    if (currentDeptId && currentSchoolId) {
-                        const welcomeH2 = document.querySelector('#welcomeMessage h2');
-                        if (welcomeH2) {
-                            welcomeH2.textContent = `Welcome to ${schoolsData[currentSchoolId].name} AI Assistant`;
-                        }
+
+                    const info = (schoolsData && schoolsData[currentSchoolId]) || DEFAULT_SCHOOLS[currentSchoolId] || {};
+                    const welcomeH2 = document.querySelector('#welcomeMessage h2');
+                    if (welcomeH2) {
+                        welcomeH2.textContent = `Welcome to ${info.name || currentSchoolId} AI Assistant`;
                     }
-                    // 学校改变时保存当前对话
+
                     saveCurrentChat();
                 });
             } catch (error) {
-                console.error('Failed to load schools:', error);
-                document.getElementById('school').innerHTML = '<option value="">Load Failed</option>';
+                // fetch failed or timed out; populate curated fallback so user can choose
+                console.error('Failed to load schools (fetch error or timeout):', error);
+                select.innerHTML = '<option value="">-- Select School --</option>';
+                const SELECT_SCHOOLS = ['UCB', 'UCLA', 'UCSD', 'UCI', 'Cornell'];
+                for (const id of SELECT_SCHOOLS) {
+                    const info = DEFAULT_SCHOOLS[id];
+                    if (!info) continue;
+                    const option = document.createElement('option');
+                    option.value = info.deptId || '';
+                    option.dataset.schoolId = id;
+                    option.textContent = `${info.name} (${id})`;
+                    select.appendChild(option);
+                }
+                select.addEventListener('change', function() {
+                    currentDeptId = this.value || '';
+                    const selectedOption = this.options[this.selectedIndex];
+                    currentSchoolId = selectedOption.dataset.schoolId || '';
+                    const info = DEFAULT_SCHOOLS[currentSchoolId] || {};
+                    const welcomeH2 = document.querySelector('#welcomeMessage h2');
+                    if (welcomeH2) {
+                        welcomeH2.textContent = `Welcome to ${info.name || currentSchoolId} AI Assistant`;
+                    }
+                    saveCurrentChat();
+                });
             }
         }
 
@@ -1214,14 +1279,15 @@
             document.getElementById('sendBtn').disabled = true;
 
             try {
+                // Build payload: prefer deptId if available, otherwise send school_id
+                const payload = { question: question, session_id: currentSessionId };
+                if (currentDeptId) payload.deptId = currentDeptId;
+                else if (currentSchoolId) payload.school_id = currentSchoolId;
+
                 const response = await fetch(`${BASE_URL}/ask`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        question: question,
-                        deptId: currentDeptId,
-                        session_id: currentSessionId
-                    })
+                    body: JSON.stringify(payload)
                 });
 
                 const data = await response.json();

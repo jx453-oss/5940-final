@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from config import Config
 import dashscope
@@ -200,36 +200,49 @@ def ask_ai():
         # Get parameters
         session_id = data.get('session_id', str(uuid.uuid4()))
         question = data.get('question', '')
-        dept_id = data.get('deptId') or data.get('dept_id')  # Support both camelCase and snake_case
+
+        # Accept either a department ID or an explicit school_id from the client.
+        # Support both camelCase and snake_case for both keys.
+        dept_id = data.get('deptId') or data.get('dept_id')
+        school_id_param = data.get('school_id') or data.get('schoolId')
 
         # Validate question parameter
         if not question or not isinstance(question, str):
             return jsonify({'error': 'Question cannot be empty and must be a string'}), 400
 
-        # Validate deptId parameter
-        if not dept_id:
-            return jsonify({
-                'error': 'deptId cannot be empty',
-                'available_dept_ids': list(Config.DEPT_TO_SCHOOL.keys())
-            }), 400
+        school_id = None
 
-        # Ensure dept_id is an integer
-        try:
-            dept_id = int(dept_id)
-        except (ValueError, TypeError):
-            return jsonify({
-                'error': f'Invalid department ID format: {dept_id}',
-                'available_dept_ids': list(Config.DEPT_TO_SCHOOL.keys())
-            }), 400
+        # If client provided school_id directly, use it (validate exists)
+        if school_id_param:
+            if school_id_param not in Config.SCHOOLS:
+                return jsonify({'error': f'Unknown school_id: {school_id_param}'}), 400
+            school_id = school_id_param
+            print(f"[Auth] Matched school via school_id parameter: {school_id}")
+        else:
+            # Otherwise, require deptId and map to a school
+            if not dept_id:
+                return jsonify({
+                    'error': 'deptId cannot be empty when school_id is not provided',
+                    'available_dept_ids': list(Config.DEPT_TO_SCHOOL.keys())
+                }), 400
 
-        # Get school_id through deptId mapping
-        school_id = Config.DEPT_TO_SCHOOL.get(dept_id)
-        if not school_id:
-            return jsonify({
-                'error': f'School not found for department ID: {dept_id}',
-                'available_dept_ids': list(Config.DEPT_TO_SCHOOL.keys())
-            }), 400
-        print(f"[Auth] Matched school via deptId={dept_id}: {school_id}")
+            # Ensure dept_id is an integer
+            try:
+                dept_id = int(dept_id)
+            except (ValueError, TypeError):
+                return jsonify({
+                    'error': f'Invalid department ID format: {dept_id}',
+                    'available_dept_ids': list(Config.DEPT_TO_SCHOOL.keys())
+                }), 400
+
+            # Get school_id through deptId mapping
+            school_id = Config.DEPT_TO_SCHOOL.get(dept_id)
+            if not school_id:
+                return jsonify({
+                    'error': f'School not found for department ID: {dept_id}',
+                    'available_dept_ids': list(Config.DEPT_TO_SCHOOL.keys())
+                }), 400
+            print(f"[Auth] Matched school via deptId={dept_id}: {school_id}")
 
         # If session doesn't exist, create new session
         if session_id not in sessions:
@@ -335,6 +348,27 @@ def list_schools():
     return jsonify({
         'schools': Config.SCHOOLS
     })
+
+
+@app.route('/', methods=['GET'])
+def serve_index():
+    """Serve the frontend index page if present."""
+    try:
+        return send_from_directory(os.path.dirname(__file__), 'index.html')
+    except Exception:
+        return jsonify({'error': 'Index page not found'}), 404
+
+
+@app.route('/<path:unused_path>', methods=['GET'])
+def catch_all(unused_path):
+    """Catch-all route: serve the SPA index so client-side routing works in browsers.
+
+    This will only be reached when no other route matches (so API endpoints are safe).
+    """
+    try:
+        return send_from_directory(os.path.dirname(__file__), 'index.html')
+    except Exception:
+        return jsonify({'error': 'Index page not found'}), 404
 
 
 @app.route('/health', methods=['GET'])

@@ -24,21 +24,35 @@ def test_ask_question(session_id=None):
     print(json.dumps(response.json(), indent=2, ensure_ascii=False))
     return response.json()
 
-def test_get_history(session_id):
-    """测试查询对话历史接口"""
+def test_get_history(session_id=None):
+    """测试查询对话历史接口
+
+    If `session_id` is not provided, create one by calling `test_ask_question`.
+    """
+    if not session_id:
+        result = test_ask_question()
+        session_id = result.get('session_id')
+
     url = f'{BASE_URL}/history/{session_id}'
-    
     response = requests.get(url)
     print(f"\n查询历史接口响应: {response.status_code}")
     print(json.dumps(response.json(), indent=2, ensure_ascii=False))
+    assert response.status_code in (200, 404)
 
-def test_clear_session(session_id):
-    """测试清除会话记录接口"""
+def test_clear_session(session_id=None):
+    """测试清除会话记录接口
+
+    If `session_id` is not provided, create one by calling `test_ask_question`.
+    """
+    if not session_id:
+        result = test_ask_question()
+        session_id = result.get('session_id')
+
     url = f'{BASE_URL}/clear/{session_id}'
-    
     response = requests.delete(url)
     print(f"\n清除会话接口响应: {response.status_code}")
     print(json.dumps(response.json(), indent=2, ensure_ascii=False))
+    assert response.status_code in (200, 404)
 
 def test_health_check():
     """测试健康检查接口"""

@@ -60,7 +60,7 @@ def test_ask_with_invalid_school_id():
     return response.status_code == 400
 
 
-def test_ask_with_rag(school_id: str, question: str):
+def test_ask_with_rag(school_id: str = 'UCI', question: str = '请告诉我关于这个学校的信息'):
     """测试RAG问答功能"""
     url = f'{BASE_URL}/ask'
     payload = {
@@ -73,18 +73,17 @@ def test_ask_with_rag(school_id: str, question: str):
     print(f"   问题: {question}")
     print(f"   状态码: {response.status_code}")
 
+    assert response.status_code in (200, 400)
     if response.status_code == 200:
         data = response.json()
         print(f"   会话ID: {data.get('session_id')}")
         print(f"   学校ID: {data.get('school_id')}")
         print(f"   回答: {data.get('answer')[:200]}..." if len(data.get('answer', '')) > 200 else f"   回答: {data.get('answer')}")
         return data
-    else:
-        print(f"   错误: {response.json()}")
-        return None
+    return None
 
 
-def test_multi_turn_conversation(school_id: str):
+def test_multi_turn_conversation(school_id: str = 'UCLA'):
     """测试多轮对话"""
     url = f'{BASE_URL}/ask'
     headers = {'Content-Type': 'application/json'}
@@ -97,6 +96,7 @@ def test_multi_turn_conversation(school_id: str):
         "school_id": school_id
     }
     response1 = requests.post(url, headers=headers, data=json.dumps(payload1))
+    assert response1.status_code in (200, 400)
     data1 = response1.json()
     session_id = data1.get('session_id')
     print(f"   [第1轮] 问: {payload1['question']}")
@@ -109,6 +109,7 @@ def test_multi_turn_conversation(school_id: str):
         "session_id": session_id
     }
     response2 = requests.post(url, headers=headers, data=json.dumps(payload2))
+    assert response2.status_code in (200, 400)
     data2 = response2.json()
     print(f"   [第2轮] 问: {payload2['question']}")
     print(f"   [第2轮] 答: {data2.get('answer')[:100]}..." if len(data2.get('answer', '')) > 100 else f"   [第2轮] 答: {data2.get('answer')}")
@@ -116,11 +117,16 @@ def test_multi_turn_conversation(school_id: str):
     return session_id
 
 
-def test_get_history(session_id: str):
+def test_get_history(session_id: str = None):
     """测试查询对话历史"""
+    if not session_id:
+        # create a session by performing a RAG Q&A
+        data = test_ask_with_rag()
+        session_id = data.get('session_id') if data else None
+
     url = f'{BASE_URL}/history/{session_id}'
     response = requests.get(url)
-    print(f"7. 查询对话历史 (session_id={session_id[:8]}...):")
+    print(f"7. 查询对话历史 (session_id={(session_id[:8] + '...') if session_id else 'None'}):")
     print(f"   状态码: {response.status_code}")
 
     if response.status_code == 200:
@@ -130,11 +136,15 @@ def test_get_history(session_id: str):
     print()
 
 
-def test_clear_session(session_id: str):
+def test_clear_session(session_id: str = None):
     """测试清除会话"""
+    if not session_id:
+        data = test_ask_with_rag()
+        session_id = data.get('session_id') if data else None
+
     url = f'{BASE_URL}/clear/{session_id}'
     response = requests.delete(url)
-    print(f"8. 清除会话 (session_id={session_id[:8]}...):")
+    print(f"8. 清除会话 (session_id={(session_id[:8] + '...') if session_id else 'None'}):")
     print(f"   状态码: {response.status_code}")
     print(f"   响应: {response.json()}\n")
 
